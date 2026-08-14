@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= dados.dadosPessoais.nome %> | Desenvolvedor de Sistemas</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    body { font-family: 'Segoe UI', system-ui, sans-serif; }
+    .hero-bg { background: linear-gradient(135deg, #0a0a0a 0%, #1a0000 100%); }
+    .red-accent { color: #e63939; }
+    section { scroll-margin-top: 80px; }
+  </style>
+</head>
+<body class="bg-black text-white">
+
+  <!-- Navbar -->
+  <nav class="fixed top-0 w-full bg-black/90 backdrop-blur-md z-50 border-b border-red-900">
+    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold">Luis<span class="red-accent">Felipe</span></h1>
+      <div class="flex gap-8 text-lg">
+        <a href="#sobre" class="hover:text-red-500 transition-colors">Sobre</a>
+        <a href="#habilidades" class="hover:text-red-500 transition-colors">Habilidades</a>
+        <a href="#certificados" class="hover:text-red-500 transition-colors">Certificados</a>
+        <a href="#contato" class="hover:text-red-500 transition-colors">Contato</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="hero" class="hero-bg min-h-screen flex items-center justify-center text-center px-6 pt-20">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-6xl md:text-7xl font-bold mb-4"><%= dados.dadosPessoais.nome %></h2>
+      <p class="text-3xl text-red-500 font-medium mb-6"><%= dados.dadosPessoais.titulo %></p>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
+        Apaixonado por criar soluções digitais com HTML, CSS e JavaScript.
+      </p>
+    </div>
+  </section>
+
+  <!-- Sobre Mim -->
+  <section id="sobre" class="py-24 bg-zinc-950">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-12 red-accent">Sobre Mim</h2>
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div>
+          <img src="<%= dados.dadosPessoais.foto %>" 
+               alt="<%= dados.dadosPessoais.nome %>" 
+               class="rounded-2xl w-full shadow-2xl">
+        </div>
+        <div class="space-y-6 text-lg">
+          <p><%= dados.dadosPessoais.sobre %></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Habilidades -->
+  <section id="habilidades" class="py-24 bg-black">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-16 red-accent">Habilidades</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <% dados.habilidades.forEach(habilidade => { %>
+          <div class="bg-zinc-900 p-8 rounded-2xl text-center hover:scale-105 transition-transform">
+            <i class="fab <%= habilidade.icone %> text-6xl red-accent mb-4"></i>
+            <h3 class="text-2xl font-semibold"><%= habilidade.nome %></h3>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certificados -->
+  <section id="certificados" class="py-24 bg-zinc-950">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-5xl font-bold text-center mb-16 red-accent">Certificados</h2>
+      <div class="grid md:grid-cols-2 gap-10">
+        <% dados.certificados.forEach(certificado => { %>
+          <div class="bg-zinc-900 rounded-3xl overflow-hidden border border-red-900 hover:border-red-600 transition-all">
+            <div class="h-48 bg-gradient-to-br from-red-900 to-black flex items-center justify-center">
+              <i class="fas <%= certificado.icon %> text-7xl text-red-500"></i>
+            </div>
+            <div class="p-8">
+              <h3 class="text-2xl font-bold mb-3"><%= certificado.titulo %></h3>
+              <p class="text-gray-400 mb-6"><%= certificado.descricao %></p>
+              <a href="<%= certificado.link %>" 
+                 target="_blank"
+                 class="inline-block w-full text-center bg-red-600 hover:bg-red-700 py-4 rounded-2xl font-semibold transition-all">
+                 Ver Certificado →
+              </a>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato -->
+  <section id="contato" class="py-24 bg-black">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-5xl font-bold mb-12 red-accent">Vamos Conversar?</h2>
+      <p class="text-xl text-gray-400 mb-10">Entre em contato ou confira meus perfis:</p>
+
+      <div class="flex flex-wrap justify-center gap-8">
+        <% dados.redesSociais.forEach(rede => { %>
+          <a href="<%= rede.link %>" target="_blank"
+             class="flex items-center gap-4 bg-zinc-900 hover:bg-zinc-800 px-10 py-6 rounded-3xl transition-all group">
+            <i class="fab <%= rede.icone %> text-5xl"></i>
+            <div class="text-left">
+              <p class="font-semibold text-xl"><%= rede.nome %></p>
+              <p class="text-gray-400"><%= rede.nome === 'Alura' ? 'Meu Perfil' : 'Perfil' %></p>
+            </div>
+          </a>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black py-12 border-t border-red-900">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <p class="text-2xl font-bold mb-2"><%= dados.dadosPessoais.nome %></p>
+      <p class="text-gray-400"><%= dados.dadosPessoais.titulo %></p>
+      <p class="text-gray-500 text-sm mt-6">© <%= ano %> Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll suave
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
